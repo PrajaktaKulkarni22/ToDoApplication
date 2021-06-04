@@ -1,0 +1,85 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import avatar from '../avatar-4.png'
+import TaskService from "../services/TaskService";
+
+function ViewTask(props){
+    const viewObj={
+        task_list:[]
+    }
+
+    const [view,setView]=useState(viewObj)
+    const [user,setUser]=useState('Prajakta')
+
+    useEffect(()=>{
+        document.title=`Welcome ${user}`
+        TaskService.getTasks().then((res)=>{
+            console.log(res);
+            if(res.status==200){
+                setView({task_list:res.data})
+            }
+        })
+    },[user])
+
+    const updateTask=(taskId)=>{
+        props.history.push(`/update/${taskId}`)
+    }
+
+    const deleteTask=(taskId)=>{
+        TaskService.deleteTask(taskId).then(res=>{
+            setView({task_list: view.task_list.filter(task=>task.taskId!==taskId)})
+        })
+    }
+
+    return(
+        <div className="centerTask">
+            <div style={{marginRight:"1300px"}}>
+                <Link to="/logout"><button className="btn btn-success">Logout</button></Link>
+            </div>
+
+            <div className="logo">
+                <img src={avatar} alt="logo" height="100px" width="100px"/>
+                <h1 style={{marginLeft:"550px"}}>Welcome {user}!</h1>
+            </div>
+
+            <div className="navbar-right">
+                <Link to="/addtask" style={{textDecoration:"none"}}>Add Task</Link>
+            </div>
+
+            <div className="search">
+                <input type="text" placeholder="Search" id="search-text-input" />
+                <button type="submit"><i className="fa fa-search"></i></button>
+            </div>
+
+            <div className="task-table container">
+                <table className="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="200px">Task Id</th>
+                            <th width="500px">Tasks</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            view.task_list.map(
+                                (task)=>
+                                <tr key={task.id}>
+                                    <td>{task.taskId}</td>
+                                    <td>{task.taskName}</td>
+                                    <td>
+                                        <button onClick={ ()=>updateTask(task.taskId)} className="btn btn-info">Update</button>
+                                        <button style={{marginLeft:"30px"}} onClick={ ()=> deleteTask(task.taskId)} className="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div> 
+            
+
+        </div>
+    )
+}
+export default ViewTask
