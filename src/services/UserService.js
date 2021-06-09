@@ -4,4 +4,8 @@ const checkLogin=(login)=>{
     return http.post("/user/login" , login)
 }
 
-export default {checkLogin}
+const registerUser=(register)=>{
+    return http.post("/user/register" , register)
+}
+
+export default {checkLogin,registerUser}

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import TaskService from "../services/TaskService"
+import UserService from "../services/UserService"
 
 function Register(props){
     const registerObj={
@@ -18,7 +18,7 @@ function Register(props){
     const handleSubmit=(e)=>{
         e.preventDefault();
         console.log(register);
-        TaskService.registerUser(register).then(res=>{
+        UserService.registerUser(register).then(res=>{
             props.history.push('/login')
         })
     }
