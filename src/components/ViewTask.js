@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import avatar from '../avatar-4.png'
 import TaskService from "../services/TaskService";
+import Select from 'react-select';
+
+// const options = [
+//     { value: 'chocolate', label: 'Chocolate' },
+//     { value: 'strawberry', label: 'Strawberry' },
+//     { value: 'vanilla', label: 'Vanilla' },
+//   ];
 
 function ViewTask(props){
     const viewObj={
@@ -10,6 +17,9 @@ function ViewTask(props){
 
     const [view,setView]=useState(viewObj)
     const [user,setUser]=useState('Prajakta')
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [options, setOptions]=useState([])
+
 
     useEffect(()=>{
         document.title=`Welcome ${user}`
@@ -21,6 +31,13 @@ function ViewTask(props){
         })
     },[user])
 
+    const handleInputChange=(searchString)=>{
+        console.log(searchString);
+        TaskService.searchTask(searchString).then((res)=>{
+            setOptions(res.data)
+            console.log(options);
+        })
+    }
     const updateTask=(taskId)=>{
         props.history.push(`/update/${taskId}`)
     }
@@ -46,10 +63,16 @@ function ViewTask(props){
                 <Link to="/addtask" style={{textDecoration:"none"}}>Add Task</Link>
             </div>
 
-            <div className="search">
+            {/* <div className="search">
                 <input type="text" placeholder="Search" id="search-text-input" />
                 <button type="submit"><i className="fa fa-search"></i></button>
-            </div>
+            </div> */}
+            <Select
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={options}
+                onInputChange={handleInputChange}
+            />
 
             <div className="task-table container">
                 <table className="table table-striped table-bordered">

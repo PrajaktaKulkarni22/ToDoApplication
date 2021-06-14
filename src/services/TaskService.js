@@ -20,4 +20,8 @@ const updateTask=(taskList,taskId)=>{
     return http.put("/task/updatetask" + '/' +taskId,taskList)
 }
 
-export default {getTasks,deleteTask,createTask,getTaskById,updateTask}
+const searchTask=(taskName)=>{
+    return http.get("/task/searchtask" + '/' +taskName)
+}
+
+export default {getTasks,deleteTask,createTask,getTaskById,updateTask,searchTask}
