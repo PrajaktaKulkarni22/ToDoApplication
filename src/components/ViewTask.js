@@ -29,7 +29,7 @@ function ViewTask(props){
                 setView({task_list:res.data})
             }
         })
-    },[user])
+    },[])
 
     const handleInputChange=(searchString)=>{
         console.log(searchString);

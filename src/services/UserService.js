@@ -8,4 +8,7 @@ const registerUser=(register)=>{
     return http.post("/user/register" , register)
 }
 
-export default {checkLogin,registerUser}
+const setNewPassword=(email,register)=>{
+    return http.put("/user/updatePassword" + '/' +email,register)
+}
+export default {checkLogin,registerUser,setNewPassword}

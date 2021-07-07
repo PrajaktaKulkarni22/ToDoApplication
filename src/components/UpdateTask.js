@@ -15,6 +15,7 @@ function UpdateTask(props){
             let task_list=res.data;
             setUpdate({taskName: task_list.taskName})
         })
+        
     },[])
 
     const changeTaskNameHandle=(event)=>{

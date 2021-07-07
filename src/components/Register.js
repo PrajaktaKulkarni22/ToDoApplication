@@ -18,7 +18,11 @@ function Register(props){
     const handleSubmit=(e)=>{
         e.preventDefault();
         console.log(register);
+
+      
+        
         UserService.registerUser(register).then(res=>{
+           
             props.history.push('/login')
         })
     }
