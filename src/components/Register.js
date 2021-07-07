@@ -23,7 +23,7 @@ function Register(props){
         
         UserService.registerUser(register).then(res=>{
            
-            props.history.push('/login')
+            props.history.push('/')
         })
     }
     return(

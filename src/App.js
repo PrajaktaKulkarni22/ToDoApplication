@@ -3,7 +3,8 @@ import Route from 'react-router-dom/Route'
 import './App.css';
 import AddTask from './components/AddTask';
 import ChangePassword from './components/ChangePassword';
-import Login from './components/Login'
+import HomePage from './components/HomePage';
+// import Login from './components/Login'
 import Logout from './components/Logout';
 import Register from './components/Register';
 import UpdateTask from './components/UpdateTask';
@@ -14,7 +15,7 @@ function App() {
     <div className="App">
     
       <Router>
-        <Route exact path={["/","/login"]} component={Login}/>
+        <Route exact path={["/","/ToDoApplication"]} component={HomePage}/>
 
         <Switch>
           <Route exact path="/register" component={Register}/>

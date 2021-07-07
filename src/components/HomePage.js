@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import UserService from '../services/UserService';
 
-function Login(props){
+function HomePage(props){
 
     // const isLoggedIn=props.isLoggedIn;
     
@@ -81,4 +81,4 @@ function Login(props){
     )
 }
 
-export default Login
+export default HomePage
